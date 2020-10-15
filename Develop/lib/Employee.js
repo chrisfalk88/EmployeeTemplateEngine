@@ -17,7 +17,7 @@ class Employee {
     getEmail() {
         return this.email;
     }
-    //i dont think this is right. since this is called in every employee type
+    
     getRole() {
         return "Employee";
     }

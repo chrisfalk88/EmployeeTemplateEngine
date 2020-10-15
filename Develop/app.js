@@ -10,9 +10,59 @@ const outputPath = path.join(OUTPUT_DIR, "team.html");
 
 const render = require("./lib/htmlRenderer");
 
-
 // Write code to use inquirer to gather information about the development team members,
 // and to create objects for each team member (using the correct classes as blueprints!)
+
+async function manager() {
+    // object destructure way
+    //const {managerName, managerID, managerEmail, managerOfficeNumber} = await inquirer.prompt([
+  const response = await inquirer.prompt([
+    // Manager Questions
+    {
+      type: "input",
+      message: "What is the Managers name?",
+      name: "managerName",
+    },
+    {
+      type: "input",
+      message: "What is the Managers ID?",
+      name: "managerID",
+    },
+    {
+      type: "input",
+      message: "What is the Managers email?",
+      name: "managerEmail",
+    },
+    {
+      type: "input",
+      message: "What is the Managers office number?",
+      name: "managerOfficeNumber",
+    },
+  ]);
+  console.log(response);
+  const manager1 = new Manager(response.managerName, response.managerID, response.managerEmail, response.managerOfficeNumber);
+  console.log(manager1);
+  //wrap this in function
+  const next = await inquirer.prompt({
+    type: "confirm",
+    message: "Would you like to add an Employee? ",
+    name: "add"
+  }) 
+  console.log(next);
+  if (next.add) {
+      //where well putt another inquirer.prompt gather employee details 
+      //repeat question
+      // call "add an employee" function again 
+      //construct the employee 
+  } else {
+      return 
+    }
+
+}
+
+manager();
+
+//Another inquireer to ask about Employyes
 
 // After the user has input all employees desired, call the `render` function (required
 // above) and pass in an array containing all employee objects; the `render` function will
