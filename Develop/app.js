@@ -10,6 +10,8 @@ const outputPath = path.join(OUTPUT_DIR, "team.html");
 
 const render = require("./lib/htmlRenderer");
 
+const teamArray = [];
+
 // Write code to use inquirer to gather information about the development team members,
 // and to create objects for each team member (using the correct classes as blueprints!)
 
@@ -42,25 +44,75 @@ async function manager() {
   console.log(response);
   const manager1 = new Manager(response.managerName, response.managerID, response.managerEmail, response.managerOfficeNumber);
   console.log(manager1);
+  teamArray.push(manager1);
+
+  async function addEmployee() {
   //wrap this in function
   const next = await inquirer.prompt({
     type: "confirm",
     message: "Would you like to add an Employee? ",
     name: "add"
   }) 
-  console.log(next);
+  //console.log(next);
   if (next.add) {
-      //where well putt another inquirer.prompt gather employee details 
+      //where well putt another inquirer.prompt gather employee details
+      const newEmp = await inquirer.prompt([ 
+          {
+          type: "confirm",
+          message: "Is this new Employee an Engineer?",
+          name: "add"
+          }
+      ])
+      console.log(newEmp);
+      console.log(newEmp.add);
+      if (newEmp.add){
+        console.log("i selected an engineer and im going to add him here")
+
+        const enginner = await inquirer.prompt([ 
+          {
+          type: "input",
+          message: "Is the Engineer's Name?",
+          name: "engName"
+          },
+          {
+            type: "input",
+            message: "What is the Engineer's ID?",
+            name: "engID",
+          },
+          {
+            type: "input",
+            message: "What is the Engineer's email?",
+            name: "engEmail",
+          },
+          {
+            type: "input",
+            message: "What is the Engineers GitHub username?",
+            name: "engGithub"
+          }
+      ])
+
+      } else if (!newEmp.add) {
+        console.log("looks like you want an intern");
+      }
       //repeat question
+
+    
       // call "add an employee" function again 
+      addEmployee();
       //construct the employee 
   } else {
       return 
     }
 
+
+  }
+
+  addEmployee();
 }
 
 manager();
+
+render()
 
 //Another inquireer to ask about Employyes
 
