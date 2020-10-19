@@ -45,6 +45,7 @@ async function manager() {
   const manager1 = new Manager(response.managerName, response.managerID, response.managerEmail, response.managerOfficeNumber);
   console.log(manager1);
   teamArray.push(manager1);
+  console.log(teamArray);
 
   async function addEmployee() {
   //wrap this in function
@@ -68,7 +69,7 @@ async function manager() {
       if (newEmp.add){
         console.log("i selected an engineer and im going to add him here")
 
-        const enginner = await inquirer.prompt([ 
+        const engineer = await inquirer.prompt([ 
           {
           type: "input",
           message: "Is the Engineer's Name?",
@@ -90,29 +91,67 @@ async function manager() {
             name: "engGithub"
           }
       ])
+        console.log(engineer);
+        const enginner1 = new Engineer(engineer.engName, engineer.engID, engineer.engEmail, engineer.engGithub);
+        console.log(enginner1);
+
+        teamArray.push(enginner1);
+        console.log(teamArray);
 
       } else if (!newEmp.add) {
         console.log("looks like you want an intern");
-      }
-      //repeat question
 
-    
-      // call "add an employee" function again 
+        const intern = await inquirer.prompt([ 
+          {
+          type: "input",
+          message: "Is the intern's Name?",
+          name: "intName"
+          },
+          {
+            type: "input",
+            message: "What is the intern's ID?",
+            name: "intID",
+          },
+          {
+            type: "input",
+            message: "What is the intern's email?",
+            name: "intEmail",
+          },
+          {
+            type: "input",
+            message: "What is the intern's school?",
+            name: "intSchool"
+          }
+      ])
+        console.log(intern);
+        const intern1 = new Intern(intern.intName, intern.intID, intern.intEmail, intern.intSchool);
+        console.log(intern1);
+
+        teamArray.push(intern1);
+        console.log(teamArray);
+      }
+
+      // gather input until N is selected  
       addEmployee();
-      //construct the employee 
+
+
   } else {
       return 
     }
 
-
   }
 
+  //call add employee after gather manager input
   addEmployee();
+
+  //render here
+  render(teamArray);
+
 }
 
 manager();
 
-render()
+
 
 //Another inquireer to ask about Employyes
 
