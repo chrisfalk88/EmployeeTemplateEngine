@@ -136,21 +136,28 @@ async function manager() {
 
 
   } else {
+      console.log(teamArray);
+      writefiles();
       return 
     }
-
+   
   }
 
   //call add employee after gather manager input
   addEmployee();
 
   //render here
-  render(teamArray);
+ 
 
 }
 
 manager();
 
+ async function writefiles() {
+  fs.writeFile('team.html', render(teamArray), 'utf-8', (err) => {
+    if (err) throw err;
+  });
+}
 
 
 //Another inquireer to ask about Employyes
