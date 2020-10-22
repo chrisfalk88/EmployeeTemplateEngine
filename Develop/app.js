@@ -64,15 +64,12 @@ async function manager() {
           name: "add"
           }
       ])
-      console.log(newEmp);
-      console.log(newEmp.add);
       if (newEmp.add){
-        console.log("i selected an engineer and im going to add him here")
 
         const engineer = await inquirer.prompt([ 
           {
           type: "input",
-          message: "Is the Engineer's Name?",
+          message: "What is the Engineer's Name?",
           name: "engName"
           },
           {
@@ -91,20 +88,21 @@ async function manager() {
             name: "engGithub"
           }
       ])
-        console.log(engineer);
+        
         const enginner1 = new Engineer(engineer.engName, engineer.engID, engineer.engEmail, engineer.engGithub);
-        console.log(enginner1);
+      
 
         teamArray.push(enginner1);
-        console.log(teamArray);
+      
 
       } else if (!newEmp.add) {
-        console.log("looks like you want an intern");
+        console.log("oh, looks like you'll want an intern then.");
+        console.log("Please enter in the interns information");
 
         const intern = await inquirer.prompt([ 
           {
           type: "input",
-          message: "Is the intern's Name?",
+          message: "What is the intern's Name?",
           name: "intName"
           },
           {
@@ -123,12 +121,12 @@ async function manager() {
             name: "intSchool"
           }
       ])
-        console.log(intern);
+        
         const intern1 = new Intern(intern.intName, intern.intID, intern.intEmail, intern.intSchool);
-        console.log(intern1);
+        
 
         teamArray.push(intern1);
-        console.log(teamArray);
+      
       }
 
       // gather input until N is selected  
@@ -136,7 +134,7 @@ async function manager() {
 
 
   } else {
-      console.log(teamArray);
+      
       writefiles();
       return 
     }
